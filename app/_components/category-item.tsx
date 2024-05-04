@@ -7,7 +7,7 @@ interface CategoryItemProps {
 
 export function CategoryItem({ category }: CategoryItemProps) {
   return (
-    <div className="flex items-center gap-3 py-3 px-4 bg-white shadow-md rounded-full">
+    <div className="flex min-w-fit min-w-[120px] items-center gap-3 rounded-full bg-white px-6 py-3 shadow-md">
       <Image
         src={category.imageUrl}
         alt={category.name}
@@ -15,7 +15,7 @@ export function CategoryItem({ category }: CategoryItemProps) {
         width={30}
       />
 
-      <span className="font-semibold text-sm">{category.name}</span>
+      <span className="text-sm font-semibold">{category.name}</span>
     </div>
   );
 }

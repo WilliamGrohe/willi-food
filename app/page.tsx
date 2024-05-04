@@ -3,8 +3,25 @@ import { Header } from "./_components/header";
 import { Search } from "./_components/search";
 import { CategoryList } from "./_components/category-list";
 import { ProductList } from "./_components/product-list";
+import { db } from "./_lib/prisma";
 
-export default function Home() {
+export default async function Home() {
+  const products = await db.product.findMany({
+    where: {
+      discountPercentage: {
+        gt: 0,
+      },
+    },
+    take: 10,
+    include: {
+      restaurant: {
+        select: {
+          name: true,
+        }
+      }
+    }
+  });
+
   return (
     <>
       <Header />
@@ -27,7 +44,7 @@ export default function Home() {
       </div>
 
       <div className="pt-6">
-        <ProductList />
+        <ProductList products={products}/>
       </div>
     </>
   );
